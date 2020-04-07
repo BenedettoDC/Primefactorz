@@ -8,7 +8,7 @@ private int position;
 private double pricePerZone = 2.3;
 private double output;
 //private double amountInput;
-private Scanner cashInput = new Scanner(System.in);
+private Scanner scanner = new Scanner(System.in);
 
 public int getPosition(){
     return position;
@@ -25,10 +25,10 @@ public void setAmountInput(double am){
     amountInput = am;
 }*/
 public Scanner getCashInput(){
-    return cashInput;
+    return scanner;
 }
-    public void setCashInput(java.util.Scanner cashInput) {
-        this.cashInput = cashInput;
+public void setCashInput(double cashInput) {
+        cashInput = scanner.nextDouble();
     }
 
     public double calculatePrice(int destinationZone){
@@ -49,7 +49,7 @@ public double payment(){
         System.out.println("Please pay the amount of "+output+"€. Only coins!");
 
         double cash;
-        cash = cashInput.nextDouble();
+        cash = scanner.nextDouble();
 
 if (cash == 2){
     return output = output - 2;
