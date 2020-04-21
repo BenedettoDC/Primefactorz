@@ -1,7 +1,5 @@
 package fahrkartenautomat;
 
-import java.util.Scanner;
-
 import static java.lang.Math.abs;
 import static java.lang.Math.round;
 

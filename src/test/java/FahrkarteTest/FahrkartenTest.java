@@ -1,32 +1,33 @@
 package FahrkarteTest;
 
-        import org.junit.Test;
-        import fahrkartenautomat.Automat;
+import fahrkartenautomat.Coin;
+import org.junit.Test;
+import fahrkartenautomat.Automat;
 
-        import java.util.ArrayList;
-        import java.util.List;
-
-        import static org.hamcrest.MatcherAssert.assertThat;
-        import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 
 
 public class FahrkartenTest {
 
     @Test
-    public void fkTest(){
-        Automat a = new Automat();
-        a.setPosition(1);
-        assertThat(a.getPosition(), is(1));
-        assertThat(a.calculatePrice(1), is(2.3));
-        assertThat(a.calculatePrice(2), is(4.6));
-        a.setPosition(5);
-        assertThat(a.calculatePrice(1), is(11.5));
-        a.setPosition(1);
-        assertThat(a.getPosition(), is (1));
+    public void testPriceCalculator() {
+        Automat a = new Automat(1);
+        assertThat(a.calculatePrice(1), is(230));
+        a = new Automat(2);
+        assertThat(a.calculatePrice(2), is(230));
+        a = new Automat(1);
+        assertThat(a.calculatePrice(4), is(920));
+    }
+
+    @Test
+    public void testRemainingMoney(){
+        Automat a = new Automat(1);
         a.calculatePrice(1);
-        assertThat(a.calculatePrice(1), is(2.3));
-        a.setCashInput (0.5);
-        assertThat(a.getCashInput(), is(0.5));
-        assertThat(a.payment(), is(1.8));
+        a.missingMoney(Coin.FIFTY_CENT);
+        a.missingMoney(Coin.TWENTY_CENT);
+        int remainingMoney = a.missingMoney(Coin.TWO_EURO);
+        assertEquals(-40,remainingMoney);
     }
 }
