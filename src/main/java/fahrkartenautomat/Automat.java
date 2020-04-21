@@ -2,83 +2,72 @@ package fahrkartenautomat;
 
 import java.util.Scanner;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.round;
+
 public class Automat {
 
-private int position;
-private double pricePerZone = 2.3;
-private double output;
-//private double amountInput;
-private Scanner scanner = new Scanner(System.in);
+    private int position;
+    private int pricePerZone = 230;
+    private int currentPrice;
+    private int priceToPay;
 
-public int getPosition(){
-    return position;
-}
-
-public void setPosition(int p){
-    position = p;
-}
-
-/*public double getAmountInput(){
-    return amountInput;
-}
-public void setAmountInput(double am){
-    amountInput = am;
-}*/
-public Scanner getCashInput(){
-    return scanner;
-}
-public void setCashInput(double cashInput) {
-        cashInput = scanner.nextDouble();
+    public Automat(int position) {
+        this.position = position;
     }
 
-    public double calculatePrice(int destinationZone){
-    output = pricePerZone * (Math.abs(destinationZone - position) + 1);
-
-    return output;
-}
-
-/*public double payment() {
-    switch (int = i) {
-        case 2:
-            output = output - 2;
+    public static void main(String[] args) {
 
     }
-}*/
-public double payment(){
-    while (output!= 0){
-        System.out.println("Please pay the amount of "+output+"€. Only coins!");
 
-        double cash;
-        cash = scanner.nextDouble();
-
-if (cash == 2){
-    return output = output - 2;
-}
-else if(cash == 1){
-    return output = output - 1;
-}
-else if(cash == 0.5){
-    return output = output - 0.5;
-}
-else if(cash == 0.2){
-    return output = output - 0.2;
-}
-else if(cash == 0.1){
-    return output = output - 0.1;
-}
-else if(cash == 0.05){
-    return output = output - 0.05;
-}
-else if(cash == 0.02){
-    return output = output - 0.02;
-}
-else if(cash == 0.01){
-    return output = output - 0.01;
-}
-else System.out.println("Error!");
+    public int calculatePrice(int destinationZone) {
+        currentPrice = pricePerZone * (Math.abs(destinationZone - position) + 1);
+        priceToPay = currentPrice;
+        return currentPrice;
     }
-    return output;
-}
 
+    public int missingMoney(Coin userinput) {
+        priceToPay = priceToPay - userinput.getCoinValue();
+        if (priceToPay <= 0){
+         printTicket();
+         if(priceToPay < 0){
+             returnMoney();
+         }
+        }
+        return priceToPay;
+    }
+
+    private void returnMoney() {
+        int modTwoEuro = abs(priceToPay) % Coin.TWO_EURO.getCoinValue();
+        int modOneEuro = modTwoEuro % Coin.ONE_EURO.getCoinValue();
+        int modFiftyCent = modTwoEuro % Coin.FIFTY_CENT.getCoinValue();
+        int modTwentyCent = modTwoEuro % Coin.TWENTY_CENT.getCoinValue();
+        int modTenCent = modTwoEuro % Coin.TEN_CENT.getCoinValue();
+        int modFiveCent = modTwoEuro % Coin.FIVE_CENT.getCoinValue();
+        int modTwoCent = modTwoEuro % Coin.TWO_CENT.getCoinValue();
+        int modOneCent = modTwoEuro % Coin.ONE_CENT.getCoinValue();
+
+        int numTwoEuro = (int)((abs(priceToPay) - modTwoEuro) / (200));
+        int numOneEuro = (int)((abs(modTwoEuro) - modOneEuro) / (100));
+        int numFiftyCent = (int)((abs(modOneEuro) - modFiftyCent) / (50));
+        int numTwentyCent = (int)((abs(modFiftyCent) - modTwentyCent) / (20));
+        int numTenCent = (int)((abs(modTwentyCent) - modTenCent) / (10));
+        int numFiveCent = (int)((abs(modTenCent) - modFiveCent) / (5));
+        int numTwoCent = (int)((abs(modFiveCent) - modTwoCent) / (2));
+        int numOneCent = (int)((abs(modTwoCent) - modOneCent) / (1));
+
+        System.out.println("Your change is in total " + abs(priceToPay) + " Euro/s. You  recieve :" +"\n"+ numTwoEuro +" 2-Euro-Coins, ");
+        System.out.println(numOneEuro + " 1-Euro-Coins,");
+        System.out.println(numFiftyCent + " Fifty-Cent-Coins,");
+        System.out.println(numTwentyCent + " Twenty-Cent-Coins");
+        System.out.println(numTenCent + " Ten-Cent-Coins,");
+        System.out.println(numFiveCent + " Five-Cent-Coins,");
+        System.out.println(numTwoCent + " Two-Cent-Coins,");
+        System.out.println(numOneCent + " One-Cent-Coins.");
+    }
+
+    private void printTicket() {
+        System.out.println("printing Ticket...");
+    }
 
 }
