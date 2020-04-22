@@ -14,6 +14,7 @@ public class Automat {
         this.position = position;
     }
 
+    // TODO MJ: in eigene Klasse, die die Initialisierung vom Automaten vornimmt und die Bespielung via Konsole ermöglicht.
     public static void main(String[] args) {
 
     }
