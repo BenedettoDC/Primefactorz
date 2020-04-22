@@ -1,4 +1,5 @@
 package fahrkartenautomat;
+import fahrkartenautomat.Automat.*;
 
 public enum Coin {
     ONE_CENT(1),
@@ -10,12 +11,15 @@ public enum Coin {
     ONE_EURO(100),
     TWO_EURO(200);
 
+
     private int coinValue;
 
     private Coin(int value){
     coinValue = value;
     }
+
     public int getCoinValue(){
         return coinValue;
     }
+
 }

@@ -1,6 +1,7 @@
 package FahrkarteTest;
 
 import fahrkartenautomat.Coin;
+import fahrkartenautomat.Note;
 import org.junit.Test;
 import fahrkartenautomat.Automat;
 
@@ -25,9 +26,10 @@ public class FahrkartenTest {
     public void testRemainingMoney(){
         Automat a = new Automat(1);
         a.calculatePrice(1);
-        a.missingMoney(Coin.FIFTY_CENT);
-        a.missingMoney(Coin.TWENTY_CENT);
-        int remainingMoney = a.missingMoney(Coin.TWO_EURO);
-        assertEquals(-40,remainingMoney);
+        a.noteCounting(Note.FIVE_EURO);
+        a.noteCounting(Note.HUNDRED_EURO);
+        a.missingMoney(Coin.TEN_CENT);
+        int remainingMoney = a.missingMoney(Coin.TWENTY_CENT);
+        assertEquals(-10300,remainingMoney);
     }
 }
