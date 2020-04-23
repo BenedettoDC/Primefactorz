@@ -25,13 +25,8 @@ public class Automat {
         return currentPrice;
     }
 
-    public int noteCounting(Note userNoteinput){
-        priceToPay = priceToPay - userNoteinput.getNoteValue();
-        return priceToPay;
-    }
-
-    public int missingMoney(Coin userCoinInput) {
-        priceToPay = priceToPay - userCoinInput.getCoinValue();
+    public int missingMoney(Money userMoneyInput) {
+        priceToPay = priceToPay - userMoneyInput.getMoneyValue();
         if (priceToPay <= 0){
          printTicket();
          if(priceToPay < 0){
@@ -43,20 +38,20 @@ public class Automat {
 
     private void returnMoney() {
         //Notes
-        int modHundredEuro = abs(priceToPay) % Note.HUNDRED_EURO.getNoteValue();
-        int modFiftyEuro = modHundredEuro % Note.FIFTY_EURO.getNoteValue();
-        int modTwentyEuro = modHundredEuro % Note.TWENTY_EURO.getNoteValue();
-        int modTenEuro = modHundredEuro % Note.TEN_EURO.getNoteValue();
-        int modFiveEuro = modHundredEuro % Note.TEN_EURO.getNoteValue();
+        int modHundredEuro = abs(priceToPay) % Money.HUNDRED_EURO.getMoneyValue();
+        int modFiftyEuro = modHundredEuro % Money.FIFTY_EURO.getMoneyValue();
+        int modTwentyEuro = modHundredEuro % Money.TWENTY_EURO.getMoneyValue();
+        int modTenEuro = modHundredEuro % Money.TEN_EURO.getMoneyValue();
+        int modFiveEuro = modHundredEuro % Money.TEN_EURO.getMoneyValue();
         //Coins
-        int modTwoEuro = modHundredEuro % Coin.TWO_EURO.getCoinValue();
-        int modOneEuro = modHundredEuro % Coin.ONE_EURO.getCoinValue();
-        int modFiftyCent = modHundredEuro % Coin.FIFTY_CENT.getCoinValue();
-        int modTwentyCent = modHundredEuro % Coin.TWENTY_CENT.getCoinValue();
-        int modTenCent = modHundredEuro % Coin.TEN_CENT.getCoinValue();
-        int modFiveCent = modHundredEuro % Coin.FIVE_CENT.getCoinValue();
-        int modTwoCent = modHundredEuro % Coin.TWO_CENT.getCoinValue();
-        int modOneCent = modHundredEuro % Coin.ONE_CENT.getCoinValue();
+        int modTwoEuro = modHundredEuro % Money.TWO_EURO.getMoneyValue();
+        int modOneEuro = modHundredEuro % Money.ONE_EURO.getMoneyValue();
+        int modFiftyCent = modHundredEuro % Money.FIFTY_CENT.getMoneyValue();
+        int modTwentyCent = modHundredEuro % Money.TWENTY_CENT.getMoneyValue();
+        int modTenCent = modHundredEuro % Money.TEN_CENT.getMoneyValue();
+        int modFiveCent = modHundredEuro % Money.FIVE_CENT.getMoneyValue();
+        int modTwoCent = modHundredEuro % Money.TWO_CENT.getMoneyValue();
+        int modOneCent = modHundredEuro % Money.ONE_CENT.getMoneyValue();
 
         //Notes
         int numHundredEuro = (int)((abs(priceToPay) - modHundredEuro) / (10000));
