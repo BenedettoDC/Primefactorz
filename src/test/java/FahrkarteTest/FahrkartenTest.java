@@ -25,10 +25,9 @@ public class FahrkartenTest {
     public void testRemainingMoney(){
         Automat a = new Automat(1);
         a.calculatePrice(1);
-        a.missingMoney(Money.FIVE_EURO);
-        a.missingMoney(Money.HUNDRED_EURO);
         a.missingMoney(Money.TEN_CENT);
-        int remainingMoney = a.missingMoney(Money.TWENTY_CENT);
-        assertEquals(-10300,remainingMoney);
+        a.missingMoney(Money.TWENTY_CENT);
+        int remainingMoney = a.missingMoney(Money.FIVE_EURO);
+        assertEquals(-300,remainingMoney);
     }
 }
