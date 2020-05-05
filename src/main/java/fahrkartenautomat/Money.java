@@ -16,14 +16,19 @@ public enum Money {
     HUNDRED_EURO(10000, "hundred-euro-note/s");
 
 
-    private int coinValue;
+    private int moneyValue;
+    private String name;
 
     private Money(int value, String name){
-    coinValue = value;
+    moneyValue = value;
+    this.name = name;
     }
 
     public int getMoneyValue(){
-        return coinValue;
+        return moneyValue;
+    }
+    public String getDisplayName(){
+        return name;
     }
 
 }
